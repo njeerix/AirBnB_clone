@@ -1,5 +1,5 @@
 from models.base_model import BaseModel
-from models import storage
+from models.engine.file_storage import FileStorage as storage
 
 class User(BaseModel):
     """User class"""

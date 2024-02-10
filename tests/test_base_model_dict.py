@@ -1,25 +1,19 @@
-#!/usr/bin/python3
+import unittest
+import datetime
+from models.engine.file_storage import storage
 from models.base_model import BaseModel
 
-my_model = BaseModel()
-my_model.name = "My_First_Model"
-my_model.my_number = 89
-print(my_model.id)
-print(my_model)
-print(type(my_model.created_at))
-print("--")
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+class TestBaseModelDict(unittest.TestCase):
+    def tearDown(self):
+        pass
 
-print("--")
-my_new_model = BaseModel(**my_model_json)
-print(my_new_model.id)
-print(my_new_model)
-print(type(my_new_model.created_at))
+    def test_to_dict_method(self):
+        my_model = BaseModel()
+        my_model.save()
+        my_model_dict = my_model.to_dict()
+        created_at_str = my_model_dict['created_at']
+        created_at = datetime.datetime.strptime(created_at_str, "%Y-%m-%dT%H:%M:%S.%f")
+        self.assertIsInstance(created_at, datetime.datetime)
 
-print("--")
-print(my_model is my_new_model)
-
+if __name__ == "__main__":
+    unittest.main()

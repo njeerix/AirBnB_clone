@@ -1,10 +1,8 @@
-"""
-Module for BaseModel class.
-"""
+from models.engine.file_storage import FileStorage
 from uuid import uuid4
 from datetime import datetime
-from models.__init__ import storage
 
+storage = FileStorage()
 class BaseModel:
     """
     Defines the BaseModel class.
@@ -24,7 +22,6 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)
 
     def __str__(self):
         """
@@ -36,9 +33,8 @@ class BaseModel:
 
     def save(self):
         """
-        Updates the public instance attribute update_at with the current datetime.
+        Updates the public instance attribute update_at with the cu
         """
-        self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
@@ -52,4 +48,4 @@ class BaseModel:
         return new_dict
 
     def some_method(self):
-        from models import storage
+        from models.engine.file_storage import storage

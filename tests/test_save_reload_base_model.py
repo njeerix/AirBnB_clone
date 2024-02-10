@@ -1,16 +1,21 @@
-#!/usr/bin/python3
-from models import storage
+import unittest
+from models.engine.file_storage import storage
 from models.base_model import BaseModel
 
-all_objs = storage.all()
-print("-- Reloaded objects --")
-for obj_id in all_objs.keys():
-    obj = all_objs[obj_id]
-    print(obj)
+class TestSaveReloadBaseModel(unittest.TestCase):
+    def test_save_and_reload(self):
+        initial_count = len(storage.all())
+        my_model = BaseModel()
+        my_model.save()
+        count_after_save = len(storage.all())
+        self.assertEqual(count_after_save, initial_count + 1)
 
-print("-- Create a new object --")
-my_model = BaseModel()
-my_model.name = "My_First_Model"
-my_model.my_number = 89
-my_model.save()
-print(my_model)
+        obj_id = my_model.id
+        del my_model
+
+        reloaded_model = storage.reload(obj_id)
+        self.assertIsNotNone(reloaded_model)
+        self.assertIsInstance(reloaded_model, BaseModel)
+
+if __name__ == "__main__":
+    unittest.main()
