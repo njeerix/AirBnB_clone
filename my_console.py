@@ -1,12 +1,3 @@
-#!/usr/bin/python3
-
-class MyClass:
-    def add(self, x, y):
-        return x + y
-"""
-AirBnB Clone - Console Module
-"""
-
 import sys
 
 
@@ -30,17 +21,42 @@ class Console:
             if user_input == "quit":
                 break
             elif user_input == "help":
-                print("Documented commands commands (type help <topic):")
-                print("================================================")
-                print("EOF help quit")
+                self.print_help()
             else:
                 print("Unknown command. Type 'help' for assistance.")
+    def print_help(self):
+        """
+        Print help information.
+        """
+
+        print("Documented commands commands (type help <topic):")
+        print("================================================")
+        print("EOF help quit")
+
+    def run_script(self, script_file):
+        """
+        Run commands from a script file.
+        """
+        with open(script_file, 'r') as file:
+            for line in file:
+                self.onecmd(line.strip())
+
+    def onecmd(self, line):
+        """
+        Process a single command.
+        """
+        if line == "quit":
+            return True
+        elif line == "help":
+            self.print_help()
+        else:
+            print("Unknown command:", line)
+
 
 if __name__ == "__main__":
     console = Console()
     if len(sys.argv) > 1:
-        with open(sys.arg[1], 'r') as script_file:
-            for line in script_file:
-                console.onecmd(line.strip())
+        script_file = sys.argv[1]
+        console.run_script(script_file)
     else:
         console.cmdloop()
