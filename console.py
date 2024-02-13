@@ -6,11 +6,19 @@ from models.base_model import BaseModel
 from datetime import datetime
 from models.user import User
 
-  class HBNBCommand(cmd.Cmd):
+
+class HBNBCommand(cmd.Cmd):
     """Command Interpreter class"""
     prompt = "(hbnb) "
-    classes = ["BaseModel", {"User": User}, "State", "City", "Amenity", "Place", 
-            "Review"]
+    classes = [
+        "BaseModel",
+        {"User": User},
+        "State",
+        "City",
+        "Amenity",
+        "Place",
+        "Review"
+    ]
 
     def all(self):
         return self.__objects
@@ -30,7 +38,7 @@ from models.user import User
         """EOF command to exit the program"""
         print("")
         return True
-    
+
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it, and prints the id"""
         if not arg:
@@ -92,8 +100,8 @@ from models.user import User
             return
 
         all_instances = storage.all().values()
-        class_instances = [instance for instance in all_instances 
-                if instance.__class__.__name__ == class_name]
+        class_instances = [instance for instance in all_instances
+                           if instance.__class__.__name__ == class_name]
         print(class_instances)
 
         if not arg:
@@ -101,8 +109,8 @@ from models.user import User
             return
 
         try:
-            print([str(obj) for obj in storage.all().values() 
-                if obj.__class__.__name__ == arg])
+            print([str(obj) for obj in storage.all().values()
+                  if obj.__class__.__name__ == arg])
         except KeyError:
             print("** class doesn't exist **")
 
@@ -131,7 +139,6 @@ from models.user import User
 
             attribute_name = args[2]
             attribute_value = args[3]
-            
             setattr(obj, attribute_name, attribute_value)
             obj.save()
         except IndexError:
@@ -154,8 +161,10 @@ from models.user import User
             print("** class doesn't exist **")
             return
 
-        count = len([instance for instance in storage.all().values() if instance.__class__.__name__ == class_name])
+        count = len([instance for instance in storage.all().values()
+                    if instance.__class__.__name__ == class_name])
         print(count)
+
 
 if __name__ == '__main__':
     cli = HBNBCommand()

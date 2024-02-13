@@ -17,8 +17,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key == 'created_at' or key == 'updated_at':
-                        setattr(self, key, datetime.strptime(value, 
-                            "%Y-%m-%dT%H:%M:%S.%f"))
+                        setattr(self, key, datetime.strptime
+                                (value, "%Y-%m-%dT%H:%M:%S.%f"))
                     else:
                         setattr(self, key, value)
         else:
@@ -42,7 +42,8 @@ class BaseModel:
 
     def to_dict(self):
         """
-        Returns a dictionary conatining all keys/values of __dict__ of the instance.
+        Returns a dictionary conatining all keys/values of
+        __dict__ of the instance.
         """
         new_dict = self.__dict__.copy()
         new_dict['__class__'] = self.__class__.__name__

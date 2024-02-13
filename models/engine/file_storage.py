@@ -1,5 +1,6 @@
 import json
 
+
 class FileStorage:
     __file_path = "file.json"
     __objects = {}
@@ -35,4 +36,6 @@ class FileStorage:
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass
+
+
 storage = FileStorage()
