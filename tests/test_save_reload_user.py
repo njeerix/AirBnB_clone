@@ -2,6 +2,7 @@ import unittest
 from models.engine.file_storage import storage
 from models.user import User
 
+
 class TestSaveReloadUser(unittest.TestCase):
     def test_save_and_reload_user(self):
         initial_count = len(storage.all())
@@ -16,6 +17,7 @@ class TestSaveReloadUser(unittest.TestCase):
         reloaded_user = storage.reload(obj_id)
         self.assertIsNotNone(reloaded_user)
         self.assertIsInstance(reloaded_user, User)
+
 
 if __name__ == "__main__":
     unittest.main()
