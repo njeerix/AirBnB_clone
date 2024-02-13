@@ -6,10 +6,11 @@ from models.base_model import BaseModel
 from datetime import datetime
 from models.user import User
 
-class HBNBCommand(cmd.Cmd):
+  class HBNBCommand(cmd.Cmd):
     """Command Interpreter class"""
     prompt = "(hbnb) "
-    classes = ["BaseModel", {"User": User}, "State", "City", "Amenity", "Place", "Review"]
+    classes = ["BaseModel", {"User": User}, "State", "City", "Amenity", "Place", 
+            "Review"]
 
     def all(self):
         return self.__objects
@@ -91,7 +92,8 @@ class HBNBCommand(cmd.Cmd):
             return
 
         all_instances = storage.all().values()
-        class_instances = [instance for instance in all_instances if instance.__class__.__name__ == class_name]
+        class_instances = [instance for instance in all_instances 
+                if instance.__class__.__name__ == class_name]
         print(class_instances)
 
         if not arg:
@@ -99,7 +101,8 @@ class HBNBCommand(cmd.Cmd):
             return
 
         try:
-            print([str(obj) for obj in storage.all().values() if obj.__class__.__name__ == arg])
+            print([str(obj) for obj in storage.all().values() 
+                if obj.__class__.__name__ == arg])
         except KeyError:
             print("** class doesn't exist **")
 
