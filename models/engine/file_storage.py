@@ -31,9 +31,11 @@ class FileStorage:
                     objdict = json.load(file)
                 except json.decoder.JSONDecodeError:
                     objdict = {}
-                for o in objdict.values():
+                for o_id o in objdict.values():
                     FileStorage_name = o["__class__"]
                     del o["__class__"]
-                    self.new(eval(FileStorage_name)(**o))
+                    obj_instance = eval(FileStorage_name)(**o)
+                    key = "{}.{}".format(FileStorage_name, o_id)
+                    self.__objects[key] = obj_instance
         else:
             open(FileStorage.__file_path, 'w').close()
