@@ -12,6 +12,10 @@ class HBNBCommand(cmd.Cmd):
     """Command interpreter for HBNB project."""
     prompt = "(hbnb) "
 
+    def __init__(self):
+        super().__init__()
+        self.classes = {"BaseModel": BaseModel}
+
     def do_create(self, line):
         args = line.split()
         if not args:
