@@ -26,20 +26,16 @@ class FileStorage:
     def reload(self):
         """DEserializes the JSON file to __objects."""
         if path.exists(self.__file_path):
-            with open(self.__file_path, 'r', encoding='utf-8') as file:
-                try:
+            try:
+                with open(self.__file_path, 'r', encoding='utf-8') as file:
                     objdict = json.load(file)
-                except json.decoder.JSONDecodeError as e:
-                    print("Error decoding JSON:", e)
-                    objdict = {}
-                for o_id, o in objdict.items():
-                    try:
+                    for o_id, o in objdict.items():
                         FileStorage_name = o["__class__"]
                         del o["__class__"]
                         obj_instance = eval(FileStorage_name)(**o)
                         key = "{}.{}".format(FileStorage_name, o_id)
                         self.__objects[key] = obj_instance
-                    except Exception as e:
-                        print("Error creating object:", e)
+            except (IOError, json.decoder.JSONDecoderError) as e:
+                        print(f"Error loading data from file: {e}")
         else:
-            open(FileStorage.__file_path, 'w').close()
+            open(self.__file_path, 'w').close()
