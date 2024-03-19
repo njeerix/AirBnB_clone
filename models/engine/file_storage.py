@@ -37,5 +37,7 @@ class FileStorage:
                         self.__objects[key] = obj_instance
                     else:
                         print(f"Error: '__class__' key missing for object with ID {o_id}")
-        except (IOError, json.decoder.JSONDecoderError) as e:
+        except IOError  as e:
             print(f"Error loading data from file: {e}")
+        except json.decoder.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
