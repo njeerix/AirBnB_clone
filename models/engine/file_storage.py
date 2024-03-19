@@ -34,6 +34,6 @@ class FileStorage:
                 for o in objdict.values():
                     FileStorage_name = o["__class__"]
                     del o["__class__"]
-                    FileStorage.new(eval(FileStorage_name)(**o))
+                    self.new(eval(FileStorage_name)(**o))
         else:
             open(FileStorage.__file_path, 'w').close()
