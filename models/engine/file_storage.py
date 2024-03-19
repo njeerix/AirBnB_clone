@@ -31,7 +31,7 @@ class FileStorage:
                     objdict = json.load(file)
                 except json.decoder.JSONDecodeError:
                     objdict = {}
-                for o_id o in objdict.items():
+                for o_id, o in objdict.items():
                     FileStorage_name = o["__class__"]
                     del o["__class__"]
                     obj_instance = eval(FileStorage_name)(**o)
