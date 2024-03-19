@@ -26,3 +26,6 @@ $ ./console.py
 (hbnb) create User
 (hbnb) show User 1
 (hbnb) update User 1 name "John Doe"
+
+Authors:
+Michell Njeeri
