@@ -110,29 +110,65 @@ class HBNBCommand(cmd.Cmd):
         setattr(all_objs[key], args[2], args[3])
         models.storage.save()
 
-    def do_User.all(self, arg):
+    def do_count(self, arg):
+        """Count the number of instances of a class."""
+        args = arg.split()
+        if not args:
+            print("** class name missing **")
+            return
+        if args[0] not in models.classes:
+            print("** class doesn't exist **")
+            return
+        count = sum(1 for obj in models.storage.all().values() if type(obj).__name__ == args[0])
+        print(count)
+
+    def do_User_all(self, arg):
         """Retrieve all instances of User."""
         self.do_all("User")
 
-    def do_State.all(self, arg):
+    def do_State_all(self, arg):
         """Retrieve all instances of State."""
         self.do_all("State")
 
-    def do_City.all(self, arg):
+    def do_City_all(self, arg):
         """Retrieve all instances of City."""
         self.do_all("City")
 
-    def do_Amenity.all(self, arg):
+    def do_Amenity_all(self, arg):
         """Retrieve all instances of Amenity."""
         self.do_all("Amenity")
 
-    def do_Place.all(self, arg):
+    def do_Place_all(self, arg):
         """Retrieve all instances of Place."""
         self.do_all("Place")
 
-    def do_Review.all(self, arg):
+    def do_Review_all(self, arg):
         """Retrieve all instances of Review."""
         self.do_all("Review")
+
+    def do_User_count(self, arg):
+        """Count the number of instances of User."""
+        self.do_count("User")
+
+    def do_City_count(self, arg):
+        """Count the number of instances of City."""
+        self.do_count("City")
+
+    def do_Amenity_count(self, arg):
+        """Count the number of instances of Amenity."""
+        self.do_count("Amenity")
+
+    def do_Place_count(self, arg):
+        """Count the number of instances of Place."""
+        self.do_count("Place")
+
+    def do_User_show(self, arg):
+        """Show details of a specific User instance."""
+        self.do_show("User" + arg)
+
+    def do_User_destroy(self, arg):
+        """Destroy a specific User interface."""
+        self.do_destroy("User" + arg)
 
 
 if __name__ == '__main__':
