@@ -26,11 +26,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         try:
+            if arg not in models.classes:
+                print("** class doesn't exist **")
+                return
             new_instance = models.classes[arg]()
             new_instance.save()
             print(new_instance.id)
-        except KeyError:
-            print("** class doesn't exist **")
+        except Exception as e:
+            print(e)
 
     def do_show(self, arg):
         """Show string represenation of an instance."""
