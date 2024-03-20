@@ -9,7 +9,6 @@ import models
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for HBNB project."""
 
-
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
@@ -82,7 +81,8 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in models.classes:
             print("** class doesn't exist **")
             return
-        print([str(obj) for obj in all_objs.values() if type(obj).__name__ == args[0]])
+        print([str(obj) for obj in all_objs.values()
+              if type(obj).__name__ == args[0]])
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id."""
@@ -119,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in models.classes:
             print("** class doesn't exist **")
             return
-        count = sum(1 for obj in models.storage.all().values() if type(obj).__name__ == args[0])
+        count = sum(1 for obj in models.storage.all().values()
+                    if type(obj).__name__ == args[0])
         print(count)
 
     def do_User_all(self, arg):

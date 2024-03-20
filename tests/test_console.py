@@ -61,5 +61,6 @@ class TestHBNBCommand(unittest.TestCase):
         self.cmd.onecmd("update BaseModel {} name \"test\"".format(new.id))
         self.assertIn("test", new.name)
 
+
 if __name__ == '__main__':
     unittest.main()
