@@ -4,6 +4,7 @@
 import cmd
 import sys
 import models
+import os
 
 
 class HBNBCommand(cmd.Cmd):
@@ -176,4 +177,10 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
+    file_path = 'file.json'
+    if not os.path.exists(file_path):
+        with open(file_path, 'w') as f:
+            pass
+
+
     HBNBCommand().cmdloop()
